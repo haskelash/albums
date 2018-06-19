@@ -7,7 +7,9 @@ class ListItem extends Component {
     const { titleStyle } = styles;
     return (
       <CardItem>
-        <Text style={titleStyle}>{this.props.library.title}</Text>
+        <Text style={titleStyle}>
+          {this.props.library.title}
+        </Text>
       </CardItem>
     );
   }
