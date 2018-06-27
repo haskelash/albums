@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateEmployee } from '../actions';
+
 import { Card, CardItem, Field, Button } from './common';
 
 class EmployeeCreate extends Component {
@@ -9,12 +12,16 @@ class EmployeeCreate extends Component {
           <Field
             label="Name"
             placeholder="John Doe"
+            value={this.props.name}
+            onChangeText={value => this.props.updateEmployee({ prop: 'name', value })}
           />
         </CardItem>
         <CardItem>
           <Field
             label="Phone"
             placeholder="555-555-5555"
+            value={this.props.phone}
+            onChangeText={value => this.props.updateEmployee({ prop: 'phone', value })}
           />
         </CardItem>
 
@@ -30,4 +37,9 @@ class EmployeeCreate extends Component {
   }
 }
 
-export default EmployeeCreate;
+const mapStateToProps = ({ employeeForm }) => {
+  const { name, phone, shift } = employeeForm;
+  return { name, phone, shift };
+};
+
+export default connect(mapStateToProps, { updateEmployee })(EmployeeCreate);
