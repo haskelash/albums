@@ -1,10 +1,10 @@
 import {
-  UPDATE_EMPLOYEE
+  UPDATE_EMPLOYEE_FORM
 } from './types';
 
-export const updateEmployee = ({ prop, value }) => (
+export const updateEmployeeForm = ({ prop, value }) => (
   {
-    type: UPDATE_EMPLOYEE,
+    type: UPDATE_EMPLOYEE_FORM,
     payload: { prop, value }
   }
 );

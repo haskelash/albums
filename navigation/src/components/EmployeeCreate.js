@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { updateEmployee } from '../actions';
+import { updateEmployeeForm } from '../actions';
 
 import { Card, CardItem, Field, Button } from './common';
 
@@ -14,7 +14,7 @@ class EmployeeCreate extends Component {
             label="Name"
             placeholder="John Doe"
             value={this.props.name}
-            onChangeText={value => this.props.updateEmployee({ prop: 'name', value })}
+            onChangeText={value => this.props.updateEmployeeForm({ prop: 'name', value })}
           />
         </CardItem>
         <CardItem>
@@ -22,14 +22,14 @@ class EmployeeCreate extends Component {
             label="Phone"
             placeholder="555-555-5555"
             value={this.props.phone}
-            onChangeText={value => this.props.updateEmployee({ prop: 'phone', value })}
+            onChangeText={value => this.props.updateEmployeeForm({ prop: 'phone', value })}
           />
         </CardItem>
         <CardItem style={{ flexDirection: 'column' }}>
           <Text style={styles.pickerLabelStyle}>Shift</Text>
           <Picker
             selectedValue={this.props.shift}
-            onValueChange={value => this.props.updateEmployee({ prop: 'shift', value })}
+            onValueChange={value => this.props.updateEmployeeForm({ prop: 'shift', value })}
           >
             <Picker.Item label="Sunday" value="Sunday" />
             <Picker.Item label="Monday" value="Monday" />
@@ -62,4 +62,4 @@ const mapStateToProps = ({ employeeForm }) => {
   return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { updateEmployee })(EmployeeCreate);
+export default connect(mapStateToProps, { updateEmployeeForm })(EmployeeCreate);
