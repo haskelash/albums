@@ -4,3 +4,4 @@ export * from './Card';
 export * from './CardItem';
 export * from './Field';
 export * from './Spinner';
+export * from './Confirm';
