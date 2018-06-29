@@ -1,6 +1,7 @@
 import {
   UPDATE_EMPLOYEE_FORM,
-  CREATE_EMPLOYEE
+  CREATE_EMPLOYEE,
+  UPDATE_EMPLOYEE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -14,7 +15,9 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_EMPLOYEE_FORM:
       return { ...state, [action.payload.prop]: action.payload.value };
     case CREATE_EMPLOYEE:
-      return { ...state, ...INITIAL_STATE };
+      return INITIAL_STATE;
+    case UPDATE_EMPLOYEE:
+      return INITIAL_STATE;
     default:
       return state;
   }
