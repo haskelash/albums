@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { text } from 'react-native-communications';
 import { Card, CardItem, Button, Confirm } from './common';
-import { updateEmployeeForm, updateEmployee } from '../actions';
+import { updateEmployeeForm, updateEmployee, deleteEmployee } from '../actions';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeEdit extends Component {
@@ -30,6 +30,15 @@ class EmployeeEdit extends Component {
     this.setState({ showModal: true });
   }
 
+  onAccept() {
+    const uid = this.props.employee.uid;
+    this.props.deleteEmployee({ uid });
+  }
+
+  onDecline() {
+    this.setState({ showModal: false });
+  }
+
   render() {
     return (
       <Card>
@@ -43,13 +52,17 @@ class EmployeeEdit extends Component {
           <Button onPress={this.onTextPress.bind(this)}>
             Text Schedule
           </Button>
-        </CardItem>
+        </CardItem>;
         <CardItem>
           <Button onPress={this.onFirePress.bind(this)}>
             Fire Employee
           </Button>
         </CardItem>
-        <Confirm visible={this.state.showModal}>
+        <Confirm
+          visible={this.state.showModal}
+          onAccept={this.onAccept.bind(this)}
+          onDecline={this.onDecline.bind(this)}
+        >
           Are you sure you want to fire this employee?
         </Confirm>
       </Card>
@@ -64,5 +77,6 @@ const mapStateToProps = ({ employeeForm }) => {
 
 export default connect(mapStateToProps, {
   updateEmployeeForm,
-  updateEmployee
+  updateEmployee,
+   deleteEmployee
 })(EmployeeEdit);
