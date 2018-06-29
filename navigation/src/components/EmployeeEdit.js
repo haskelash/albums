@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Card, CardItem, Button } from './common';
-import { updateEmployeeForm } from '../actions';
+import { updateEmployeeForm, updateEmployee } from '../actions';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeEdit extends Component {
@@ -13,7 +13,9 @@ class EmployeeEdit extends Component {
   }
 
   onButtonPress() {
-    console.log(this.props);
+    const { name, phone, shift } = this.props;
+    const uid = this.props.employee.uid;
+    this.props.updateEmployee({ name, phone, shift, uid });
   }
 
   render() {
@@ -35,4 +37,7 @@ const mapStateToProps = ({ employeeForm }) => {
   return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { updateEmployeeForm })(EmployeeEdit);
+export default connect(mapStateToProps, {
+  updateEmployeeForm,
+  updateEmployee
+})(EmployeeEdit);
