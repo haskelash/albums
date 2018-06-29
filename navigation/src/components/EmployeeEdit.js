@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { text } from 'react-native-communications';
-import { Card, CardItem, Button } from './common';
+import { Card, CardItem, Button, Confirm } from './common';
 import { updateEmployeeForm, updateEmployee } from '../actions';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeEdit extends Component {
+  state = { showModal: false };
+
   componentWillMount() {
     _.each(this.props.employee, (value, prop) => {
       this.props.updateEmployeeForm({ prop, value });
@@ -24,6 +26,10 @@ class EmployeeEdit extends Component {
     text(phone, `Your upcoming shift is on ${shift}.`);
   }
 
+  onFirePress() {
+    this.setState({ showModal: true });
+  }
+
   render() {
     return (
       <Card>
@@ -38,6 +44,14 @@ class EmployeeEdit extends Component {
             Text Schedule
           </Button>
         </CardItem>
+        <CardItem>
+          <Button onPress={this.onFirePress.bind(this)}>
+            Fire Employee
+          </Button>
+        </CardItem>
+        <Confirm visible={this.state.showModal}>
+          Are you sure you want to fire this employee?
+        </Confirm>
       </Card>
     );
   }
